@@ -46,4 +46,4 @@ jobs:
       - name: Publish snapshot to Nexus
         run: cargo publish --registry=akazukin-snapshots
         env:
-          CARGO_REGISTRIES_AKAZUKIN_SNAPSHOTS_TOKEN: ${{ secrets.NEXUS_COMMON_BASE64_TOKEN }}
+          CARGO_REGISTRIES_AKAZUKIN_SNAPSHOTS_TOKEN: "BASIC ${{ secrets.NEXUS_COMMON_BASE64_TOKEN }}"
