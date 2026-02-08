@@ -1,11 +1,11 @@
-# Ignore Cargo project-specific cache
+.idea
+
+debug/
+target/
+
 Cargo.lock
 
 
-# Ignore Cargo build output directory
-target/
+# Added by cargo
 
-
-# Ignore editor files or directies
-.vscode/
-.idea
+/target

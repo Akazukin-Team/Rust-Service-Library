@@ -1,13 +1,13 @@
 [package]
-name = "<PLACEHOLDER_ARTIFACT>"
-version = "<PLACEHOLDER_VERSION>"
+name = "service"
+version = "0.1.0"
 authors = ["Akazukin-Team"]
 
 edition = "2024"
 rust-version="1.93.0"
 
-description = "<PLACEHOLDER_DESCRIPTION>"
-repository = "https://github.com/Akazukin-Team/<PLACEHOLDER_REPO>.git"
+description = ""
+repository = "https://github.com/Akazukin-Team/Service-Library-Rust.git"
 
 
 [dependencies]

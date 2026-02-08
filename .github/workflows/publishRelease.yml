@@ -44,7 +44,7 @@ jobs:
       - name: Publish release to Nexus
         run: cargo publish --registry=akazukin-releases
         env:
-          CARGO_REGISTRIES_AKAZUKIN_SNAPSHOTS_TOKEN: ${{ secrets.NEXUS_COMMON_BASE64_TOKEN }}
+          CARGO_REGISTRIES_AKAZUKIN_RELEASES_TOKEN: ${{ secrets.NEXUS_COMMON_BASE64_TOKEN }}
 
       - name: Publish snapshot to Nexus
         run: cargo publish --registry=akazukin-snapshots
