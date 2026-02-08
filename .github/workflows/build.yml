@@ -41,7 +41,10 @@ jobs:
       - name: Clean cache
         run: cargo clean
 
-      - name: Check and Test
+      - name: Check
+        run: cargo check test --all-features
+
+      - name: Test
         run: cargo check test --all-features
 
       - name: Format
