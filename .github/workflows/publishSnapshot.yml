@@ -22,7 +22,7 @@ jobs:
       - name: Cache
         uses: Swatinem/rust-cache@v2
 
-      - name: Setup JDK ${{ env.CARGO_CHANNEL }}
+      - name: Setup Rust ${{ env.CARGO_CHANNEL }}
         uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: ${{ env.CARGO_CHANNEL }}
