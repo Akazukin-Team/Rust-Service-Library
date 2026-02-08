@@ -1,0 +1,60 @@
+name: Build and upload artifacts
+
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+      - 'master'
+      - 'product'
+      - 'prod'
+
+      - 'develop'
+      - 'dev'
+
+
+env:
+  CARGO_CHANNEL: beta
+
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Cache
+        uses: Swatinem/rust-cache@v2
+
+      - name: Setup JDK ${{ env.CARGO_CHANNEL }}
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: ${{ env.CARGO_CHANNEL }}
+          components: rustfmt, clippy
+
+      - name: Clean cache
+        run: cargo clean
+
+      - name: Check and Test
+        run: cargo check test --all-features
+
+      - name: Format
+        run: cargo fmt --all
+
+      - name: Format
+        run: cargo clippy -- -D warnings
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: artifact
+          path: publish/build/libs/

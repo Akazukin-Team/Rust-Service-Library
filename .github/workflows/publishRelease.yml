@@ -1,0 +1,52 @@
+name: Publish release to Repository
+
+on:
+  release:
+    types: [ published ]
+
+
+env:
+  CARGO_CHANNEL: beta
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Cache
+        uses: Swatinem/rust-cache@v2
+
+      - name: Setup JDK ${{ env.CARGO_CHANNEL }}
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: ${{ env.CARGO_CHANNEL }}
+          components: rustfmt, clippy
+
+      - name: Clean cache
+        run: cargo clean
+
+      - name: Check and Test
+        run: cargo check test --all-features
+
+      - name: Check format
+        run: cargo fmt --all -- --check
+
+      - name: Analyze code
+        run: cargo clippy -- -D warnings
+
+      - name: Publish release to Nexus
+        run: cargo publish --registry=akazukin-releases
+        env:
+          CARGO_REGISTRIES_AKAZUKIN_SNAPSHOTS_TOKEN: ${{ secrets.NEXUS_COMMON_BASE64_TOKEN }}
+
+      - name: Publish snapshot to Nexus
+        run: cargo publish --registry=akazukin-snapshots
+        env:
+          CARGO_REGISTRIES_AKAZUKIN_SNAPSHOTS_TOKEN: ${{ secrets.NEXUS_COMMON_BASE64_TOKEN }}
