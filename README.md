@@ -1,6 +1,6 @@
 # Service Library for Rust
 
-[![Build Status](https://github.com/Akazukin-Team/Rust-Service-Library/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/Akazukin-Team/Rust-Service-Library/actions/workflows/build.yml?query=branch:main)
+[![Build Status](https://github.com/Akazukin-Team/Rust-Service-Library/actions/workflows/build.yml/badge.svg)](https://github.com/Akazukin-Team/Rust-Service-Library/actions/workflows/build.yml?query=branch:main)
 
 A library providing manager for many similar services.
 
