@@ -1,6 +1,6 @@
 use crate::service::holder::service_holder::{ServiceHolder, ServiceHolderImpl};
-use crate::service::manager::service_store::ServiceStore;
-use crate::service::registry::registry::ServiceRegistry;
+use crate::service::managers::service_store::ServiceStore;
+use crate::service::registries::registry::ServiceRegistry;
 use std::ptr::eq;
 use std::sync::Mutex;
 
@@ -18,6 +18,12 @@ impl<T> MultiServiceRegistry<T> {
     }
 }
 
+impl<T> Default for MultiServiceRegistry<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<T: 'static> ServiceStore<T> for MultiServiceRegistry<T> {
     fn get_all_services(&self) -> Vec<&T> {
         self.get_all_holders()
@@ -26,8 +32,8 @@ impl<T: 'static> ServiceStore<T> for MultiServiceRegistry<T> {
             .collect()
     }
 
-    fn get_all_holders(&self) -> Vec<&Box<dyn ServiceHolder<T>>> {
-        self.holders.iter().collect()
+    fn get_all_holders(&self) -> Vec<&dyn ServiceHolder<T>> {
+        self.holders.iter().map(|e| &**e).collect()
     }
 
     fn contains_service(&self, id: u16, service: &T) -> bool {
@@ -46,15 +52,11 @@ impl<T: 'static> ServiceStore<T> for MultiServiceRegistry<T> {
 }
 
 impl<T: 'static> ServiceRegistry<T> for MultiServiceRegistry<T> {
-    fn register_service(
-        &mut self,
-        id: u16,
-        service: T,
-    ) -> Result<&Box<dyn ServiceHolder<T>>, String> {
+    fn register_service(&mut self, id: u16, service: T) -> Result<&dyn ServiceHolder<T>, String> {
         let _lock = self.safe_rc.lock();
         self.holders
             .push(Box::new(ServiceHolderImpl::new(id, service)));
-        Ok(self.holders.last().unwrap())
+        Ok(self.holders.last().map(|e| &**e).unwrap())
     }
 
     fn unregister_service(

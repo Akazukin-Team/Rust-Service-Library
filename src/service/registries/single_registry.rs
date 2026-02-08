@@ -1,7 +1,7 @@
 use crate::service::holder::service_holder::ServiceHolder;
-use crate::service::manager::service_store::ServiceStore;
-use crate::service::registry::multi_registry::MultiServiceRegistry;
-use crate::service::registry::registry::ServiceRegistry;
+use crate::service::managers::service_store::ServiceStore;
+use crate::service::registries::multi_registry::MultiServiceRegistry;
+use crate::service::registries::registry::ServiceRegistry;
 
 pub struct SingleServiceRegistry<T> {
     registry: MultiServiceRegistry<T>,
@@ -12,7 +12,7 @@ impl<T: 'static> ServiceStore<T> for SingleServiceRegistry<T> {
         self.registry.get_all_services()
     }
 
-    fn get_all_holders(&self) -> Vec<&Box<dyn ServiceHolder<T>>> {
+    fn get_all_holders(&self) -> Vec<&dyn ServiceHolder<T>> {
         self.registry.get_all_holders()
     }
 
@@ -30,11 +30,7 @@ impl<T: 'static> ServiceStore<T> for SingleServiceRegistry<T> {
 }
 
 impl<T: 'static> ServiceRegistry<T> for SingleServiceRegistry<T> {
-    fn register_service(
-        &mut self,
-        id: u16,
-        service: T,
-    ) -> Result<&Box<dyn ServiceHolder<T>>, String> {
+    fn register_service(&mut self, id: u16, service: T) -> Result<&dyn ServiceHolder<T>, String> {
         if self.contains_service_by_id(id) {
             return Err(format!("Service (Id:{}) already exists", id));
         }

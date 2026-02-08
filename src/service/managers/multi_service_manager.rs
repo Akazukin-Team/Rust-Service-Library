@@ -1,11 +1,11 @@
 use crate::service::holder::service_holder::ServiceHolder;
-use crate::service::manager::service_manager::ServiceManager;
-use crate::service::manager::service_store::ServiceStore;
-use crate::service::registry::registry::ServiceRegistry;
+use crate::service::managers::service_manager::ServiceManager;
+use crate::service::managers::service_store::ServiceStore;
+use crate::service::registries::registry::ServiceRegistry;
 
 pub trait MultiServiceManager<T>: ServiceManager<T> {
     fn get_services_by_id(&self, id: u16) -> Vec<&T>;
-    fn get_holders_by_id(&self, id: u16) -> Vec<&Box<dyn ServiceHolder<T>>>;
+    fn get_holders_by_id(&self, id: u16) -> Vec<&dyn ServiceHolder<T>>;
 }
 
 pub struct MultiServiceManagerImpl<T> {
@@ -17,8 +17,8 @@ impl<T> MultiServiceManagerImpl<T> {
         Self { registry }
     }
 
-    pub fn get_registry(&self) -> &Box<dyn ServiceRegistry<T>> {
-        &self.registry
+    pub fn get_registry(&self) -> &dyn ServiceRegistry<T> {
+        &*self.registry
     }
 }
 
@@ -27,7 +27,7 @@ impl<T> ServiceStore<T> for MultiServiceManagerImpl<T> {
         self.registry.get_all_services()
     }
 
-    fn get_all_holders(&self) -> Vec<&Box<dyn ServiceHolder<T>>> {
+    fn get_all_holders(&self) -> Vec<&dyn ServiceHolder<T>> {
         self.registry.get_all_holders()
     }
 
@@ -60,12 +60,12 @@ impl<T> MultiServiceManager<T> for MultiServiceManagerImpl<T> {
             .collect()
     }
 
-    fn get_holders_by_id(&self, id: u16) -> Vec<&Box<dyn ServiceHolder<T>>> {
+    fn get_holders_by_id(&self, id: u16) -> Vec<&dyn ServiceHolder<T>> {
         self.registry
             .get_all_holders()
             .iter()
             .filter(|&e| e.get_id() == id)
-            .map(|e| *e)
+            .copied()
             .collect()
     }
 }
