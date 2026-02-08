@@ -1,8 +1,8 @@
-# <PLACEHOLDER_NAME>
+# Service Library for Rust
 
-[![Build Status](https://github.com/Akazukin-Team/<PLACEHOLDER_REPO>/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/Akazukin-Team/<PLACEHOLDER_REPO>/actions/workflows/build.yml?query=branch:main)
+[![Build Status](https://github.com/Akazukin-Team/Rust-Service-Library/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/Akazukin-Team/Rust-Service-Library/actions/workflows/build.yml?query=branch:main)
 
-<PLACEHOLDER_DESCRIPTION>
+A library providing manager for many similar services.
 
 ---
 
@@ -22,7 +22,7 @@
 
 ## Features
 
-- <PLACEHOLDER_FEATURES>
+- Provides manager for many similar services.
 
 ---
 
@@ -44,14 +44,14 @@ Make sure you have the following installed:
 
    ```toml
    [registries.akazukin-mixed]
-   index = "sparse+https://nexus.akazukin.org/repository/cargo-<PLACEHOLDER_REGISTRY>/"
+   index = "sparse+https://nexus.akazukin.org/repository/cargo-public-libraries/"
    credential-provider = "cargo:token"
    ```
 
 2. Add the dependency to the `<dependencies>` block in your `pom.xml` file:
    ```toml
    [dependencies]
-   library = { package = "<PLACEHOLDER_ARTIFACT>", version = "VERSION", registry = "akazukin-mixed" }
+   library = { package = "service", version = "VERSION", registry = "akazukin-mixed" }
    ```
 
 ---
@@ -70,8 +70,8 @@ To build the project from source, follow these steps:
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/Akazukin-Team/<PLACEHOLDER_REPO>.git
-   cd <PLACEHOLDER_REPO>
+   git clone https://github.com/Akazukin-Team/Rust-Service-Library.git
+   cd Rust-Service-Library
    ```
 
 2. Build the project with cargo:

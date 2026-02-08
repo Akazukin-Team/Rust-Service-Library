@@ -6,8 +6,8 @@ authors = ["Akazukin-Team"]
 edition = "2024"
 rust-version="1.93.0"
 
-description = ""
-repository = "https://github.com/Akazukin-Team/Service-Library-Rust.git"
+description = "A library providing manager for many similar services."
+repository = "https://github.com/Akazukin-Team/Rust-Service-Library.git"
 
 
 [dependencies]
