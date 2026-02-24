@@ -1,7 +1,7 @@
-use crate::service::holder::service_holder::ServiceHolder;
-use crate::service::manager::service_store::ServiceStore;
-use crate::service::registry::multi_registry::MultiServiceRegistry;
-use crate::service::registry::registry::ServiceRegistry;
+use crate::service::holders::service_holder::ServiceHolder;
+use crate::service::managers::service_store::ServiceStore;
+use crate::service::registries::multi_registry::MultiServiceRegistry;
+use crate::service::registries::registry::ServiceRegistry;
 
 pub struct SingleServiceRegistry<T> {
     delegate: MultiServiceRegistry<T>,

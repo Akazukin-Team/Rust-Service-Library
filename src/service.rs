@@ -1,3 +1,3 @@
-pub mod holder;
-pub mod manager;
-pub mod registry;
+pub mod holders;
+pub mod managers;
+pub mod registries;
