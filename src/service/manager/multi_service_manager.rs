@@ -1,7 +1,7 @@
 use crate::service::holder::service_holder::ServiceHolder;
-use crate::service::managers::service_manager::ServiceManager;
-use crate::service::managers::service_store::ServiceStore;
-use crate::service::registries::registry::ServiceRegistry;
+use crate::service::manager::service_manager::ServiceManager;
+use crate::service::manager::service_store::ServiceStore;
+use crate::service::registry::registry::ServiceRegistry;
 
 pub trait MultiServiceManager<T>: ServiceManager<T> {
     fn get_services_by_id(&self, id: u16) -> Vec<&T>;
