@@ -24,7 +24,7 @@ impl<T> Default for MultiServiceRegistry<T> {
     }
 }
 
-impl<T: 'static> ServiceStore<T> for MultiServiceRegistry<T> {
+impl<T> ServiceStore<T> for MultiServiceRegistry<T> {
     fn get_all_services(&self) -> Vec<&T> {
         self.get_all_holders()
             .iter()
