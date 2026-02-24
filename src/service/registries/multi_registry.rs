@@ -1,6 +1,6 @@
-use crate::service::holder::service_holder::{ServiceHolder, ServiceHolderImpl};
-use crate::service::manager::service_store::ServiceStore;
-use crate::service::registry::registry::ServiceRegistry;
+use crate::service::holders::service_holder::{ServiceHolder, ServiceHolderImpl};
+use crate::service::managers::service_store::ServiceStore;
+use crate::service::registries::registry::ServiceRegistry;
 use std::ptr::eq;
 use std::sync::Mutex;
 
