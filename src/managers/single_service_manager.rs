@@ -1,7 +1,5 @@
 use crate::holders::service_holder::ServiceHolder;
-use crate::managers::multi_service_manager::{
-    MultiServiceManager, MultiServiceManagerImpl,
-};
+use crate::managers::multi_service_manager::{MultiServiceManager, MultiServiceManagerImpl};
 use crate::managers::service_manager::ServiceManager;
 use crate::managers::service_store::ServiceStore;
 use crate::registries::registry::ServiceRegistry;
