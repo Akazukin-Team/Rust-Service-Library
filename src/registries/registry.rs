@@ -1,5 +1,5 @@
-use crate::service::holders::service_holder::ServiceHolder;
-use crate::service::managers::service_store::ServiceStore;
+use crate::holders::service_holder::ServiceHolder;
+use crate::managers::service_store::ServiceStore;
 
 pub trait ServiceRegistry<T>: ServiceStore<T> {
     fn register_service(&mut self, id: u16, service: T) -> Result<&dyn ServiceHolder<T>, String>;

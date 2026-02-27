@@ -1,4 +1,4 @@
-use crate::service::holders::service_holder::ServiceHolder;
+use crate::holders::service_holder::ServiceHolder;
 
 pub trait ServiceStore<T> {
     fn get_all_services(&self) -> Vec<&T>;

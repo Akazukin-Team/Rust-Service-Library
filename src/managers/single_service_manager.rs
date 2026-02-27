@@ -1,10 +1,8 @@
-use crate::service::holders::service_holder::ServiceHolder;
-use crate::service::managers::multi_service_manager::{
-    MultiServiceManager, MultiServiceManagerImpl,
-};
-use crate::service::managers::service_manager::ServiceManager;
-use crate::service::managers::service_store::ServiceStore;
-use crate::service::registries::registry::ServiceRegistry;
+use crate::holders::service_holder::ServiceHolder;
+use crate::managers::multi_service_manager::{MultiServiceManager, MultiServiceManagerImpl};
+use crate::managers::service_manager::ServiceManager;
+use crate::managers::service_store::ServiceStore;
+use crate::registries::registry::ServiceRegistry;
 
 pub trait SingleServiceManager<T>: ServiceManager<T> {
     fn get_service_by_id(&self, id: u16) -> Option<&T>;
